@@ -19,13 +19,19 @@ bot.user.setStatus("idle");
 });
 
 bot.on("message", async message => {
-  let messageArray = message.content.split(" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
+if (message.author.bot) return;
+if (message.channel.type === "dm") return;
 
-  if(cmd === `${prefix}ping`){
-    message.channel.send("Pong!")
-  }
+let prefix = config.prefix;
+if (!message.content.startsWith(prefix)) return;
+
+let messageArray = message.content.split(" ");
+let cmd = messageArray[0];
+let args = messageArray.slice(1);
+
+if(cmd === `${prefix}ping`){
+  message.channel.send("Pong!")
+}
 
   });
 
