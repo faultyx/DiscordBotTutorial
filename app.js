@@ -10,30 +10,32 @@ const bot = new Discord.Client();
 // Listener Events
 bot.on("ready", async () => {
 
-console.log("Tutorial bot is Online!");
+console.log(`${bot.user.tag} is Online!`);
 
 bot.user.setActivity("a tutorial", {type: "WATCHING"});
 
-bot.user.setStatus("idle");
+bot.user.setStatus("dnd");
 
 });
 
 bot.on("message", async message => {
+
 if (message.author.bot) return;
-if (message.channel.type === "dm") return;
 
 let prefix = config.prefix;
+
 if (!message.content.startsWith(prefix)) return;
 
-let messageArray = message.content.split(" ");
-let cmd = messageArray[0];
-let args = messageArray.slice(1);
+let msg = message.content.toLowerCase()
 
-if(cmd === `${prefix}ping`){
-  message.channel.send("Pong!")
+let args = message.content.slice(prefix.length).slice(" ");
+
+if (msg.startsWith(prefix + "ping")) {
+  let msg = await message.channel.send("Pinging");
+  msg.edit(`:ping_pong:Pong! \`${msg.createdTimestamp - message.createdTimestamp}ms\``);
 }
 
-  });
+});
 
 // login
 bot.login(config.token); // since our token is in config we put config.token
