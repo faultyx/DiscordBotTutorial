@@ -5,7 +5,7 @@ let user = message.mentions.users.first() || message.author;
 
 let embed = new Discord.RichEmbed()
 .setColor("#4bf442")
-.setTitle(`${user.tag}'s Info`)
+.setAuthor(`${user.tag}'s Info`, `${user.avatarURL}`)
 .setFooter(`User ID: ${user.id}`)
 .setTimestamp()
 .addField("Discord Name:", user.username)
