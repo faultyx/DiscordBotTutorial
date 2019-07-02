@@ -56,9 +56,8 @@ let args = message.content.split(" ").slice(1);
 let command = args.shift();
   
 let cmd = bot.commands.get(command);
-
-let commandFile = bot.commands.get(cmd.slice(prefix.length));
-if (commandFile) commandFile.run(bot, message, args);
+  
+cmd.run(bot, message, args);
 
 });
 
