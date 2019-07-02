@@ -1,10 +1,10 @@
-exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args) => {
 
   let msg = await message.channel.send("Pinging");
-  msg.edit(`:ping_pong:Pong! \`${msg.createdTimestamp - message.createdTimestamp}ms\``);
+  msg.edit(`Ping. ${bot.ping}ms`);
 
-}
+};
 
-exports.help = {
+module.exports.help = {
   name: "ping"
-}
+};
