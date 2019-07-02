@@ -32,6 +32,17 @@ bot.commands.set(props.help.name, props);
 
 });
 
+fs.readdir("./events/", (err, files) => {
+    console.log(`${files.length} Events Loaded.`);
+    if (err)
+      console.log(err);
+    files.forEach(file => {
+        let eventFunc = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+        bot.on(eventName, (...args) => eventFunc.run(bot, ...args));
+    });
+});
+
 // Listener Events
 bot.on("ready", async () => {
 
