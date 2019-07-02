@@ -43,34 +43,5 @@ fs.readdir("./events/", (err, files) => {
     });
 });
 
-// Listener Events
-bot.on("ready", async () => {
-
-console.log(`${bot.user.tag} is Online!`);
-
-bot.user.setActivity("a tutorial", {type: "WATCHING"});
-
-bot.user.setStatus("online");
-
-});
-
-bot.on("message", async message => {
-
-if (message.author.bot) return;
-
-let prefix = config.defaultPrefix;
-
-if (!message.content.startsWith(prefix)) return;
-
-let args = message.content.split(" ").slice(1);
-  
-let command = args.shift();
-  
-let cmd = bot.commands.get(command);
-  
-cmd.run(bot, message, args);
-
-});
-
 // login
 bot.login(config.token);
