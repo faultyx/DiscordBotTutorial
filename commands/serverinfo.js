@@ -6,7 +6,7 @@ const embed = new Discord.RichEmbed()
 .setColor("#42f4e2")
 .setTimestamp()
 .addField("Owner:", `${message.guild.owner.user.tag} | ${message.guild.owner.user.id}`)
-.addField("Created At:", message.guild.createdAt)
+.addField("Created At:", message.guild.createdAt.toUTCString())
 .addField("Member Count:", message.guild.memberCount)
 message.channel.send(embed);
 
