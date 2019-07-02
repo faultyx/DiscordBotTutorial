@@ -1,4 +1,3 @@
-// Packages required!
 const Discord = require("discord.js");
 const fs = require("fs");
 
@@ -13,12 +12,14 @@ bot.commands = new Discord.Collection();
 // command handler
 fs.readdir("./commands/", (err, files) => {
 
-if (err) console.log(err);
+if (err) 
+  console.log(err);
 
 let jsfile = files.filter(f => f.split(".").pop() === "js")
 if(jsfile.length <= 0){
-console.log("No files in the commands folder!")
+console.log("No files in the commands folder!");
 return;
+  
 }
 
 jsfile.forEach((f, i) => {
@@ -46,17 +47,15 @@ bot.on("message", async message => {
 
 if (message.author.bot) return;
 
-let prefix = config.prefix;
+let prefix = config.defaultPrefix;
 
 if (!message.content.startsWith(prefix)) return;
 
-let msg = message.content.toLowerCase()
-
-let messageArray = message.content.split(" ");
-
-let cmd = messageArray[0];
-
-let args = messageArray.slice(1);
+let args = message.content.split(" ").slice(1);
+  
+let command = args.shift();
+  
+let cmd = bot.commands.get(command);
 
 let commandFile = bot.commands.get(cmd.slice(prefix.length));
 if (commandFile) commandFile.run(bot, message, args);
@@ -64,4 +63,4 @@ if (commandFile) commandFile.run(bot, message, args);
 });
 
 // login
-bot.login(config.token); // since our token is in config we put config.token
+bot.login(config.token);
